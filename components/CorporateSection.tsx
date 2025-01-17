@@ -24,7 +24,7 @@ export default function CorporateSection() {
               </div>
               <p className="ml-16 text-lg leading-6 font-medium text-gray-900">Dedicated Corporate Portal</p>
               <p className="mt-2 ml-16 text-base text-gray-500">
-                Access a tailored dashboard to manage your company's recycling efforts efficiently.
+                {"Access a tailored dashboard to manage your company's recycling efforts efficiently."}
               </p>
             </div>
 
@@ -44,7 +44,7 @@ export default function CorporateSection() {
               </div>
               <p className="ml-16 text-lg leading-6 font-medium text-gray-900">Detailed Reporting</p>
               <p className="mt-2 ml-16 text-base text-gray-500">
-                Get insights into your company's environmental impact and recycling performance.
+                {"Get insights into your company's environmental impact and recycling performance."}
               </p>
             </div>
           </div>

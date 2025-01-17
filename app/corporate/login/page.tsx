@@ -54,7 +54,7 @@ export default function CorporateLogin() {
               Forgot your password?
             </Link>
             <div className="text-sm text-gray-500">
-              Don't have a corporate account?{' '}
+              {"Don't have a corporate account?"}{' '}
               <Link href="/corporate/signup" className="text-green-600 hover:text-green-500">
                 Sign up here
               </Link>
