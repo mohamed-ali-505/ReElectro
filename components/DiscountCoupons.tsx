@@ -1,9 +1,10 @@
+// DiscountCoupons.tsx
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from './ui/radio-group';
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
-interface Coupon {
+export interface Coupon {  // إضافة تصدير للنوع
   id: number;
   name: string;
   address: string;
@@ -26,24 +27,26 @@ const coupons: Coupon[] = [
 ];
 
 export default function DiscountCoupons({ onSelect }: { onSelect: (coupon: Coupon | null) => void }) {
-  const [selectedCoupon, setSelectedCoupon] = useState<Coupon | null>(null);
-
-  const handleSelect = (coupon: Coupon | null) => {
-    setSelectedCoupon(coupon);
-    onSelect(coupon);
-  };
+  const [selectedCoupon, setSelectedCoupon] = useState<null | Coupon>(null);
 
   return (
     <div className="mt-6">
       <h3 className="text-lg font-semibold mb-4">Select a discount coupon:</h3>
-      <RadioGroup onValueChange={(value:string) => {
-        const selected = coupons.find((c) => c.id === parseInt(value!));
-        handleSelect(selected || null);
+      <RadioGroup value={selectedCoupon?.id.toString()} onValueChange={(value) => {
+        const selected = coupons.find(c => c.id === parseInt(value));
+        setSelectedCoupon(selected || null);
+        onSelect(selected || null);
       }}>
         <div className="space-y-4">
           {coupons.map((coupon) => (
-            <div key={coupon.id} className="flex items-center space-x-2">
-              <RadioGroupItem value={coupon.id.toString()} id={`coupon-${coupon.id}`} />
+            <div key={coupon.id} className={`flex items-center space-x-2 p-2 rounded-md ${selectedCoupon?.id === coupon.id ? 'bg-green-100' : ''}`}>
+              <RadioGroupItem
+                value={coupon.id.toString()}
+                id={`coupon-${coupon.id}`}
+                className={`w-4 h-4 border-2 
+                  ${selectedCoupon?.id === coupon.id ? 'bg-black border-black' : 'bg-white border-gray-500'} 
+                  rounded-full checked:bg-black checked:border-black focus:outline-none`}  // تعديل هنا
+              />
               <Label htmlFor={`coupon-${coupon.id}`} className="flex-grow">
                 <div className="flex justify-between items-center">
                   <span className="text-right">{coupon.name} - {coupon.specialization}</span>
@@ -56,15 +59,18 @@ export default function DiscountCoupons({ onSelect }: { onSelect: (coupon: Coupo
         </div>
       </RadioGroup>
       {selectedCoupon && (
-        <div className="mt-4 p-4 bg-green-50 rounded-md">
-          <p className="font-semibold">Selected coupon:</p>
-          <p className="text-right">{selectedCoupon.name} - {selectedCoupon.discountPercentage}% discount</p>
+        <div className="mt-4 p-4 bg-green-100 rounded-md border border-green-300">
+          <p className="font-semibold text-green-800">Selected coupon:</p>
+          <p className="text-right text-green-700">{selectedCoupon.name} - {selectedCoupon.discountPercentage}% discount</p>
         </div>
       )}
-      <Button 
-        className="mt-4" 
-        variant="outline" 
-        onClick={() => { setSelectedCoupon(null); onSelect(null); }}
+      <Button
+        className="mt-4"
+        variant="outline"
+        onClick={() => {
+          setSelectedCoupon(null);
+          onSelect(null);
+        }}
       >
         Clear Selection
       </Button>

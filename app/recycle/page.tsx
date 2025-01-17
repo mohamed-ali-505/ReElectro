@@ -1,24 +1,22 @@
 'use client'
-
+import { Coupon } from "@/components/DiscountCoupons"; 
 import { useState } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import DiscountCoupons from '@/components/DiscountCoupons'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { Checkbox } from "@/components/ui/checkbox"
+import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export default function RecyclePage() {
   const [wantsCoupon, setWantsCoupon] = useState(false);
-  const [selectedCoupon, setSelectedCoupon] = useState(null);
+  const [selectedCoupon, setSelectedCoupon] = useState<null | Coupon>(null); 
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Handle form submission here
     console.log('Form submitted', { wantsCoupon, selectedCoupon });
-    // You would typically send this data to your backend
   };
 
   return (
@@ -46,14 +44,14 @@ export default function RecyclePage() {
             </div>
             <div>
               <Label htmlFor="items">Items to be recycled</Label>
-              <Textarea id="items" required />
+              <Textarea id="items" required value={''} onChange={() => {}} />
             </div>
             <div className="flex items-center space-x-2">
               <Checkbox id="wantsCoupon" checked={wantsCoupon} onCheckedChange={(checked) => setWantsCoupon(checked as boolean)} />
               <Label htmlFor="wantsCoupon">I would like to receive a discount coupon</Label>
             </div>
             {wantsCoupon && (
-              <DiscountCoupons onSelect={setSelectedCoupon} />
+              <DiscountCoupons onSelect={setSelectedCoupon} /> 
             )}
             <Button type="submit" className="w-full">Submit Request</Button>
           </form>
@@ -61,6 +59,5 @@ export default function RecyclePage() {
       </main>
       <Footer />
     </div>
-  )
+  );
 }
-
