@@ -26,7 +26,8 @@ const coupons: Coupon[] = [
   { id: 10, name: "حياة لاب", address: "طلخا", specialization: "جميع أنواع التحاليل", phoneNumber: "01060571533", discountPercentage: 30 },
 ];
 
-export default function DiscountCoupons({ onSelect }: { onSelect: (coupon: Coupon | null) => void }) {
+// export default function DiscountCoupons({ onSelect }: { onSelect?: (coupon: Coupon | null) => void }) {
+export default function DiscountCoupons() {
   const [selectedCoupon, setSelectedCoupon] = useState<null | Coupon>(null);
 
   return (
@@ -35,7 +36,7 @@ export default function DiscountCoupons({ onSelect }: { onSelect: (coupon: Coupo
       <RadioGroup value={selectedCoupon?.id.toString()} onValueChange={(value) => {
         const selected = coupons.find(c => c.id === parseInt(value));
         setSelectedCoupon(selected || null);
-        onSelect(selected || null);
+        // onSelect&&onSelect(selected || null);
       }}>
         <div className="space-y-4">
           {coupons.map((coupon) => (
@@ -69,7 +70,7 @@ export default function DiscountCoupons({ onSelect }: { onSelect: (coupon: Coupo
         variant="outline"
         onClick={() => {
           setSelectedCoupon(null);
-          onSelect(null);
+          // onSelect(null);
         }}
       >
         Clear Selection

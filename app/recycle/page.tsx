@@ -13,13 +13,12 @@ import { ImageUpload } from '@/components/ImageUpload'
 
 export default function RecyclePage() {
   const [wantsCoupon, setWantsCoupon] = useState(false);
-  const [selectedCoupon, setSelectedCoupon] = useState(null);
   const [imageFile, setImageFile] = useState<File | null>(null);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // Handle form submission here
-    console.log('Form submitted', { wantsCoupon, selectedCoupon, imageFile });
+    console.log('Form submitted', { wantsCoupon, imageFile });
     // You would typically send this data to your backend
   };
 
@@ -60,7 +59,7 @@ export default function RecyclePage() {
               <Label htmlFor="wantsCoupon">I would like to receive a discount coupon</Label>
             </div>
             {wantsCoupon && (
-              <DiscountCoupons onSelect={setSelectedCoupon} />
+              <DiscountCoupons  />
             )}
             <Button type="submit" className="w-full">Submit Request</Button>
           </form>
