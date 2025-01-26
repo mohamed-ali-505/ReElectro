@@ -36,13 +36,13 @@ export default function AboutPage() {
                 </div>
 
                 <div className="bg-[#1e4d6b] rounded-lg p-8">
-                  <Image
-                    src="/placeholder.svg?height=400&width=400"
-                    alt="About ReElectro"
-                    width={400}
-                    height={400}
-                    className="w-full h-auto rounded-lg"
-                  />
+                <iframe width="100%" height="315" 
+        src="https://www.youtube.com/embed/C97GRDX2n4E" 
+        title="YouTube video player" 
+        frameBorder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowFullScreen>
+</iframe>
                 </div>
               </div>
             </div>

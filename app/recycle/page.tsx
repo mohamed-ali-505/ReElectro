@@ -1,22 +1,26 @@
 'use client'
-import { Coupon } from "@/components/DiscountCoupons"; 
+
 import { useState } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import DiscountCoupons from '@/components/DiscountCoupons'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Checkbox } from "@/components/ui/checkbox"
+import { ImageUpload } from '@/components/ImageUpload'
 
 export default function RecyclePage() {
   const [wantsCoupon, setWantsCoupon] = useState(false);
-  const [selectedCoupon, setSelectedCoupon] = useState<null | Coupon>(null); 
+  const [selectedCoupon, setSelectedCoupon] = useState(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('Form submitted', { wantsCoupon, selectedCoupon });
+    // Handle form submission here
+    console.log('Form submitted', { wantsCoupon, selectedCoupon, imageFile });
+    // You would typically send this data to your backend
   };
 
   return (
@@ -44,14 +48,19 @@ export default function RecyclePage() {
             </div>
             <div>
               <Label htmlFor="items">Items to be recycled</Label>
-              <Textarea id="items" required value={''} onChange={() => {}} />
+              <div className="flex gap-4">
+                <Textarea id="items" required className="flex-grow h-24" />
+                <div className="w-1/3">
+                  <ImageUpload onImageUpload={setImageFile} />
+                </div>
+              </div>
             </div>
             <div className="flex items-center space-x-2">
               <Checkbox id="wantsCoupon" checked={wantsCoupon} onCheckedChange={(checked) => setWantsCoupon(checked as boolean)} />
               <Label htmlFor="wantsCoupon">I would like to receive a discount coupon</Label>
             </div>
             {wantsCoupon && (
-              <DiscountCoupons onSelect={setSelectedCoupon} /> 
+              <DiscountCoupons onSelect={setSelectedCoupon} />
             )}
             <Button type="submit" className="w-full">Submit Request</Button>
           </form>
@@ -59,5 +68,6 @@ export default function RecyclePage() {
       </main>
       <Footer />
     </div>
-  );
+  )
 }
+
